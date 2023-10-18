@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Electrolize&family=Overpass:wght@300&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Electrolize', sans-serif;
+  @apply bg-gray-50;
+}
+.anticon{
+  display:block !important;
+}
+/* .slick-dots{
+  top: 650px !important;;
+} */
+.sw-logo{
+  width: 200px;
+  height: 70px;
+}
+@media only screen and (max-width: 670px) {
+  .sw-logo {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media only screen and (max-width: 1100px) {
+  .sw-logo {
+    width: 150px;
+    height: 100px;
+  }
+}
+.ant-btn-primary{
+  background-color: #1677ff; 
+}
+
+@media (min-width: 768px) {
+  body{
+    overflow: hidden;
+  }
+  .categories::-webkit-scrollbar{
+    display: none;
+  }
+  
+}
