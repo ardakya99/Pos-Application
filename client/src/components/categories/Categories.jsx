@@ -1,42 +1,45 @@
-import {PlusOutlined} from "@ant-design/icons";
+import { EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import Add from "./Add";
+import Edit from "./Edit";
 import "./style.css";
 
-const Categories = () => {
-  return (
-    <ul className="flex gap-4 md:flex-col overflow-y-auto text-lg">
-        <li className="category-item">
-            <span>Tümü</span>
-        </li>
-        <li className="category-item">
-            <span>Yiyecek</span>
-        </li>
-        <li className="category-item">
-            <span>İçecek</span>
-        </li>
-        <li className="category-item">
-            <span>Meyve</span>
-        </li>
-        <li className="category-item">
-            <span>Sebze</span>
-        </li>
-        <li className="category-item">
-            <span>Kıyafet</span>
-        </li>
-        <li className="category-item">
-            <span>Elektronik</span>
-        </li>
-        <li className="category-item">
-            <span>Elektronik</span>
-        </li>
-        <li className="category-item">
-            <span>Elektronik</span>
-        </li>
-        <li className="category-item">
-            <PlusOutlined className="md:text-2xl"/>
-        </li>
-        
-    </ul>
-  )
-}
 
-export default Categories
+const Categories = ({categories, setCategories}) => {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  
+ return (
+    <ul className="flex gap-4 md:flex-col overflow-y-auto text-lg">
+      {categories.map((item) => (
+        <li className="category-item" key={item._id}>
+        <span>{item.title}</span>
+        </li>
+      ))}
+      
+      <li className="category-item !bg-purple-800 hover:opacity-90"
+       onClick={() => {setIsAddModalOpen(true)}}>
+        <PlusOutlined className="md:text-2xl" />
+      </li>
+      <li className="category-item !bg-yellow-700 hover:opacity-90"
+       onClick={() => {setIsEditModalOpen(true)}}>
+        <EditOutlined  className="md:text-2xl" />
+      </li>
+      <Add
+       isAddModalOpen={isAddModalOpen}
+       setIsAddModalOpen={setIsAddModalOpen}
+       categories={categories}
+       setCategories={setCategories}
+       />
+       <Edit
+       isEditModalOpen={isEditModalOpen}
+       setIsEditModalOpen={setIsEditModalOpen}
+       categories={categories}
+       setCategories={setCategories}
+       />
+    </ul>
+  );
+};
+
+export default Categories;
