@@ -1,45 +1,52 @@
 import { Button, Form, Input, Modal, Table, message } from "antd";
 import React, { useState } from "react";
 
-const Edit = ({ isEditModalOpen, setIsEditModalOpen, categories, setCategories }) => {
+const Edit = ({
+  isEditModalOpen,
+  setIsEditModalOpen,
+  categories,
+  setCategories,
+}) => {
   const [editingRow, seteditingRow] = useState({});
 
   const onFinish = (values) => {
-      try{
-          fetch('http://localhost:5000/api/categories/update-category',{
-            method:"PUT",
-            body: JSON.stringify({...values, categoryId: editingRow._id}),
-            headers: {"Content-type": "application/json; chatser=UTF-8"},
-          });
-          message.success("Kategori Başarıyla güncellendi.");
-          setCategories(categories.map((item) => {
-            if(item._id === editingRow._id) {
-              return{...item, title: values.title}
-            }
-            return(item)
-          }));
-      }catch(error) {
-        message.error("Bir şeyler yanlış gitti.")
-        console.log(error)
-      }
-  }
-  
-  const deleteCategory = (id) => {
-    if(window.confirm("Emin misiniz?")){
-      try {
-        fetch("http://localhost:5000/api/categories/delete-category",{
-            method:"DELETE",
-            body: JSON.stringify({categoryId: id}),
-            headers: {"Content-type": "application/json; chatser=UTF-8"},
+    try {
+      fetch("http://localhost:5000/api/categories/update-category", {
+        method: "PUT",
+        body: JSON.stringify({ ...values, categoryId: editingRow._id }),
+        headers: { "Content-type": "application/json; chatser=UTF-8" },
+      });
+      message.success("Kategori Başarıyla güncellendi.");
+      setCategories(
+        categories.map((item) => {
+          if (item._id === editingRow._id) {
+            return { ...item, title: values.title };
+          }
+          return item;
         })
-        message.success("Kategori Başarıyla Silinmiştir.");
-        setCategories(categories.filter((item) => item._id !== id));
+      );
     } catch (error) {
-      message.error("Bir şeyler yanlış gitti.")
+      message.error("Bir şeyler yanlış gitti.");
       console.log(error);
     }
+  };
+
+  const deleteCategory = (id) => {
+    if (window.confirm("Emin misiniz?")) {
+      try {
+        fetch("http://localhost:5000/api/categories/delete-category", {
+          method: "DELETE",
+          body: JSON.stringify({ categoryId: id }),
+          headers: { "Content-type": "application/json; chatser=UTF-8" },
+        });
+        message.success("Kategori Başarıyla Silinmiştir.");
+        setCategories(categories.filter((item) => item._id !== id));
+      } catch (error) {
+        message.error("Bir şeyler yanlış gitti.");
+        console.log(error);
+      }
     }
-  }
+  };
   const columns = [
     {
       title: "Kategori Adı",
@@ -62,11 +69,21 @@ const Edit = ({ isEditModalOpen, setIsEditModalOpen, categories, setCategories }
       render: (_, record) => {
         return (
           <div>
-            <Button type="link" onClick={() => seteditingRow(record)} className="pl-0">
+            <Button
+              type="link"
+              onClick={() => seteditingRow(record)}
+              className="pl-0"
+            >
               Düzenle
             </Button>
-            <Button type="link" htmlType="submit" className="text-gray-500">Kaydet</Button>
-            <Button type="link" danger onClick={() => deleteCategory(record._id)}>
+            <Button type="link" htmlType="submit" className="text-gray-500">
+              Kaydet
+            </Button>
+            <Button
+              type="link"
+              danger
+              onClick={() => deleteCategory(record._id)}
+            >
               Sil
             </Button>
           </div>
