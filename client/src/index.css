@@ -9,8 +9,9 @@ body {
   font-family: 'Electrolize', sans-serif;
   @apply bg-gray-50;
 }
-.anticon{
-  display:block !important;
+.menu-link .anticon{
+  display:flex!important;
+  justify-content: center;
 }
 /* .slick-dots{
   top: 650px !important;;

@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteCart } from "../../redux/cartSlice";
-import { increase, decrease } from "../../redux/cartSlice";
+import { increase, decrease, cleanAllProduct } from "../../redux/cartSlice";
 
 const CartTotals = () => {
   const cart = useSelector((state) => state.cart);
@@ -35,7 +35,7 @@ const CartTotals = () => {
                   </span>
                 </div>
               </div>
-              <div className="flex items-center gap-x-1">
+              <div className="flex items-center">
                 <Button
                   type="primary"
                   size="small"
@@ -43,7 +43,7 @@ const CartTotals = () => {
                   icon={<PlusCircleOutlined />}
                   onClick={() => dispatch(increase(item))}
                 />
-                <span className="font-bold">{item.quantity}</span>
+                <span className="font-bold w-6 inline-block text-center">{item.quantity}</span>
                 <Button
                   type="primary"
                   size="small"
@@ -100,6 +100,7 @@ const CartTotals = () => {
             className="w-full mt-2 flex items-center justify-center"
             icon={<ClearOutlined />}
             danger
+            onClick={() => dispatch(cleanAllProduct())}
           >
             Temizle
           </Button>

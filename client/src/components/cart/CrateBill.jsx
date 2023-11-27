@@ -1,10 +1,11 @@
 import { Button, Card, Form, Input, Modal, Select } from "antd";
+import { useSelector } from "react-redux";
 
 const CrateBill = ({ isModalOpen, setIsModalOpen }) => {
   const onFinish = (values) => {
     console.log("Success:", values);
   };
-
+  const cart = useSelector((state) => state.cart);
   return (
     <Modal
       title="Fatura Oluştur"
@@ -53,15 +54,15 @@ const CrateBill = ({ isModalOpen, setIsModalOpen }) => {
         <Card className="">
           <div className="flex justify-between">
             <span>Ara Toplam</span>
-            <span>549.00₺</span>
+            <span>{cart.total.toFixed(2)}₺</span>
           </div>
           <div className="flex justify-between my-2">
             <span>KDV Toplam (%8)</span>
-            <span className="text-red-600">+43.92₺</span>
+            <span className="text-red-600">+{((cart.total * cart.tax) / 100).toFixed(2)}₺</span>
           </div>
           <div className="flex justify-between">
             <span className="font-bold">Toplam</span>
-            <span className="font-bold">92.92₺</span>
+            <span className="font-bold">{cart.total.toFixed(2)}₺</span>
           </div>
           <div className="flex justify-end">
             <Button
