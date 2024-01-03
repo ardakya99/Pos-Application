@@ -107,7 +107,7 @@ const CartPage = () => {
     },
   ];
 
-  return (
+    return (
     <>
       <Header />
       <div className="px-6">
