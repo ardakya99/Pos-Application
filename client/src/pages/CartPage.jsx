@@ -36,7 +36,7 @@ const CartPage = () => {
       },
     },
     {
-      title: "Ürün Adeti",
+      title: "Ürün Adetiii",
       dataIndex: "quantity",
       key: "quantity",
       render: (text, record) => {
