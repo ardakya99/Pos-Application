@@ -17,7 +17,7 @@ const Add = ({
         body: JSON.stringify(values),
         headers: { "Content-type": "application/json; chatser=UTF-8" },
       });
-      message.success("Kategori Başarıyla Eklendi.");
+      message.success("Ürün Başarıyla Eklendi.");
       form.resetFields();
       setProducts([
         ...products,
